@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nombre = document.getElementById('nombre').value.trim();
     if (nombre) {
       localStorage.setItem('nombreUsuario', nombre);
-      window.location.href = 'products.html';
+      window.location.href = '/html/products.html';
     }
   });
 });

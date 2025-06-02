@@ -1,0 +1,36 @@
+body {
+  background-color: #fff6e5;
+}
+
+.category-btn {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  width: 100%;
+}
+
+.product-card {
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.product-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.btn-add {
+  font-size: 1rem;
+  width: 100%;
+}
+
+.category-section {
+  display: none;
+}
+
+.category-section.active {
+  display: block;
+}

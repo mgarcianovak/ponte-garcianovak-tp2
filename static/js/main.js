@@ -57,11 +57,14 @@ function createProductCard(product) {
   card.append(img, cardBody);
   col.appendChild(card);
 
+  btnAdd.addEventListener("click", () => agregarAlCarrito(product));
+  btnRemove.addEventListener("click", () => quitarDelCarrito(product.id));
+
+
   return col;
 }
 
 async function loadProducts() {
-  // Cambiá estas URLs por las de tu API real
   const notebooks = await fetchProducts("/api/notebooks");
   const pcs = await fetchProducts("/api/pcs");
 

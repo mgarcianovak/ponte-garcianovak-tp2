@@ -1,25 +1,20 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
+const PORT = 3000;
 
-// Middleware para JSON
-app.use(express.json());
-
-// Archivos estáticos (HTML, CSS, JS)
+// Middleware para archivos estáticos
 app.use(express.static(path.join(__dirname, 'static')));
 
-// Rutas de la API
-const productRoutes = require('./routes/api/products');
-app.use('/api', productRoutes);
+// Montar el router de productos en /api
+const productsRouter = require('./routes/api/products');
+app.use('/api', productsRouter);
 
-// Catch-all para rutas no encontradas
-app.use((req, res) => {
-  res.status(404).send('Página no encontrada');
+// Ruta raíz
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static/html/index.html'));
 });
 
-// Iniciar servidor
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
