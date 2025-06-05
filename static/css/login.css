@@ -1,6 +1,71 @@
-.bg-light{
-    background-image: url('https://media.istockphoto.com/id/1329715338/es/vector/los-puntos-y-las-l%C3%ADneas-penetran-hacia-arriba-a-trav%C3%A9s-de-la-tecnolog%C3%ADa-de-red-de.jpg?s=1024x1024&w=is&k=20&c=YYUDf-gs-ma4nWfzYlnDf_rU-8zm0FF-DVOB_IkiBUw=');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
+.body{
+    background-image:url('https://www.megatecnologia.com.ar/documentos/13/1116_megatecnologia-tienda-de-tecnologia-argentina.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+  .img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: auto;
+  }  
+  .nombre{
+    position: absolute;
+    color:white;
+    top: 3px;
+    left: 80px;
+    width: 60px;
+    height: auto;
+  }
+
+  .contenedor{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+  }
+
+  .btn {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border: none;
+      color: white;
+      padding: 15px 28px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+  .text{
+    font-size: 28px;
+    font-weight: 700;
+    color: #6a11cb;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .inputs{
+    padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+      transition: border 0.3s, box-shadow 0.3s;
+  }
 }
+
+
+
+.title{
+    color:  white;
+    text-decoration: underline;
+  }

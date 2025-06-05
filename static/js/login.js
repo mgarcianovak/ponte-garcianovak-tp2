@@ -8,4 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'products.html';
     }
   });
+  const btn_salir = document.getElementById('btn_salir');
+  btn_salir.addEventListener("click" , (a) =>{
+    a.preventDefault()
+    window.open('https://www.google.com.mx/');
+  });
+
 });
