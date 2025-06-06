@@ -28,11 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </nav>
   `;
 
-  // Esperamos que el navbar esté renderizado para medir su altura
   const navbar = document.querySelector("nav.navbar");
   if (navbar) {
     const navbarHeight = navbar.offsetHeight;
-    // Aplicamos padding-top dinámico al body para que el contenido no quede tapado
     document.body.style.paddingTop = navbarHeight + "px";
   }
 });
