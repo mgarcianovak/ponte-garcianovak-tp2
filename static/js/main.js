@@ -1,5 +1,27 @@
 const notebooksContainer = document.getElementById("notebooks");
 const pcsContainer = document.getElementById("pcs");
+const btn_nav = document.getElementById("btn_nav");
+const menu = document.getElementById("menu");
+      
+        
+btn_nav.addEventListener("click" , (e) =>{
+  e.preventDefault();
+  if (menu.style.display === "none" || menu.style.display === "") {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+});
+
+// Obtener el carrito desde localStorage
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+// Guardar el carrito en localStorage
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 async function fetchProducts(url) {
   try {
@@ -11,6 +33,8 @@ async function fetchProducts(url) {
     return [];
   }
 }
+
+
 
 function createProductCard(product) {
   const col = document.createElement("div");
@@ -45,10 +69,39 @@ function createProductCard(product) {
   const btnAdd = document.createElement("button");
   btnAdd.className = "btn btn-success";
   btnAdd.textContent = "Agregar";
-
+  
   const btnRemove = document.createElement("button");
   btnRemove.className = "btn btn-danger";
   btnRemove.textContent = "Quitar";
+
+  // Evento para agregar al carrito
+  btnAdd.addEventListener("click", () => {
+    const cart = getCart();
+    const existing = cart.find(item => item.id === product.id && item.name === product.name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    saveCart(cart);
+    alert("Producto agregado al carrito");
+  });
+
+  // Evento para quitar del carrito
+  btnRemove.addEventListener("click", () => {
+    let cart = getCart();
+    const index = cart.findIndex(item => item.id === product.id && item.name === product.name);
+    if (index !== -1) {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+      } else {
+        cart.splice(index, 1);
+      }
+      saveCart(cart);
+      alert("Producto eliminado del carrito");
+    }
+  });
+
 
   btnGroup.appendChild(btnAdd);
   btnGroup.appendChild(btnRemove);
@@ -60,6 +113,7 @@ function createProductCard(product) {
   return col;
 }
 
+//
 async function loadProducts() {
   // Cambiá estas URLs por las de tu API real
   const notebooks = await fetchProducts("/api/notebooks");
