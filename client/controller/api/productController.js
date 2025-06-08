@@ -1,8 +1,14 @@
 const productService = require('../../service/productService');
 
 module.exports = {
-  getAll: (req, res) => {
-    res.json(productService.getAllProducts());
+  getAll: async (req, res) => {
+    try{
+      const products = await productService.getAllProducts();
+      res.json(products);
+    }
+    catch(error){
+      console.log(error);
+    }
   },
 
   getByCategory: (req, res) => {

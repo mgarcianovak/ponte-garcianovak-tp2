@@ -1,6 +1,13 @@
-const Product = require('../model/Product');
+class Product {
+  constructor(id, name, price, category, image) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.category = category;
+    this.image = image;
+  }
+}
 
-// Productos hardcodeados por ahora. Proximos a implementar via bbdd
 const products = [
   new Product(1, 'Notebook Lenovo', 800000, 'notebook', '/img/products/lenovo.jpg'),
   new Product(2, 'Macbook Air', 1200000, 'notebook', '/img/products/macbook.jpg'),
@@ -10,12 +17,8 @@ const products = [
   new Product(6, 'PC Oficina', 350000, 'pc', '/img/products/pc_oficina.jpg'),
 ];
 
-module.exports = {
-  getAllProducts: () => products,
+const getAllProducts = (req, res) => {
+    res.json(products);
+}
 
-  getProductsByCategory: (category) =>
-    products.filter(product => product.category === category),
-
-  getProductById: (id) =>
-    products.find(product => product.id === parseInt(id)),
-};
+module.exports = {getAllProducts};
