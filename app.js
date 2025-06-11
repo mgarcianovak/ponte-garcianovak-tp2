@@ -16,6 +16,10 @@ app.use('/products', productsRouter);
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'static/html/index.html'));
 });
+// Rutas estaticas
+app.get('/products.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static/html/products.html'));
+});
 
 // Fallback 404
 app.use((req, res) => {
