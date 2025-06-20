@@ -1,36 +1,112 @@
 body {
-  background-color: #fff6e5;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #FFF;
+  padding: 1rem;
+  color: #1B263B;
 }
 
-.category-btn {
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
-  margin: 0.5rem;
-  width: 100%;
+/* Grilla general */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
-.product-card {
+/* Tarjeta de producto */
+.card {
+  background-color: #415A77;
+  border-radius: 20px;
+  border-width: 2px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.2s;
 }
 
-.product-card:hover {
-  transform: scale(1.03);
+.card:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
 }
 
-.product-img {
-  height: 200px;
-  object-fit: cover;
-}
-
-.btn-add {
-  font-size: 1rem;
+.card-img-top {
   width: 100%;
+  height: 300px;
+  object-fit: contain;
+  background-color: #FFF;
 }
 
-.category-section {
-  display: none;
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.category-section.active {
-  display: block;
+/* Título y precio */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #FFF;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+.card-text.fw-bold {
+  font-size: 1rem;
+  color: #FFF;
+}
+
+/* Controles de cantidad y acciones */
+.product-controls {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.product-controls input[type="number"] {
+  width: 60px;
+  padding: 0.2rem;
+  text-align: center;
+  border: 1px solid #0D1B2A;
+  border-radius: 4px;
+}
+
+.btn{
+  background-color: #0D1B2A; color: #FFFFFF;
+}
+
+.btn:hover{
+  color: #0D1B2A; background-color: #FFFFFF;
+}
+
+/* Texto de cantidad en carrito */
+.card-body .text-muted {
+  font-size: 0.85rem;
+  text-align: right;
+  color: #FFF;
+}
+
+/* Mensaje de feedback */
+.cart-feedback {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0D1B2A;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
