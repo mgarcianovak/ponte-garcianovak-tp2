@@ -10,26 +10,55 @@
 </head>
 
 <body>
-  <div id="navbar-placeholder"></div>
-  <script src="/js/navbar.js"></script>
+  <nav class="navbar navbar-expand-lg fixed-top mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center text-white" href="/html/products.html">
+        <img src="/img/logo.png" alt="Logo" width="40" height="40" class="me-2" />
+        <span>TechStore</span>
+      </a>
+      <span class="navbar-text text-white mx-3">Ponte, Lucas / Garcia Novak, Mariano</span>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/html/products.html">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/html/cart.html">Carrito</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/html/ticket.html">Finalizar compra</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/html/login.html">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <main class="container">
-    <section id="notebooks-section" class="mb-5">
-      <h2>Notebooks</h2>
-      <div id="notebooks" class="row row-cols-1 row-cols-md-3 g-4">
+    <section id="notebooks-section">
+      <h2 class="pt-3 pb-2">Notebooks</h2>
+      <div id="notebooks" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
       </div>
     </section>
 
-    <section id="pcs-section">
-      <h2>Computadoras de Escritorio</h2>
-      <div id="pcs" class="row row-cols-1 row-cols-md-3 g-4">
+    <section id="pcs-section" class="my-4">
+      <h2 class="pt-3 pb-2">Computadoras de Escritorio</h2>
+      <div id="pcs" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
       </div>
     </section>
+
   </main>
+  <footer>
+    <p>&copy; 2025 TechStore. Todos los derechos reservados.</p>
+    <p><a href="https://www.utnfravirtual.org.ar/" target="_blank">Campus UTN</a>
+    </p>
+  </footer>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/products.js"></script>
 </body>
 
 </html>

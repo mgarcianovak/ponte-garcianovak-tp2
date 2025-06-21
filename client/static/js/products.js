@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     price.textContent = `$${product.price.toFixed(2)}`;
 
     const quantityDisplay = document.createElement("p");
-    quantityDisplay.className = "card-text mb-1 text-end text-muted";
+    quantityDisplay.className = "card-text mb-1 text-end";
     const cart = getCart();
     const existing = cart.find(item => item.id === product.id);
     quantityDisplay.textContent = `En carrito: ${existing ? existing.quantity : 0}`;
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (quantity > 0) {
         addToCart(product, quantity);
         updateCard();
-        showCartMessage(`Agregado ${quantity} al carrito`);
+        showCartMessage(`${quantity} producto(s) agregado(s) al carrito`);
       }
     });
 
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRemove.addEventListener("click", () => {
       removeFromCart(product);
       updateCard();
-      showCartMessage(`Eliminado 1 del carrito`, 'remove');
+      showCartMessage(`1 producto eliminado del carrito`, 'remove');
     });
 
     const controls = document.createElement("div");
