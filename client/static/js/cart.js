@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function calculateTotal(cart) {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
   function updateCartView() {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const price = document.createElement("p");
       price.className = "card-text fw-bold";
-      price.textContent = `$ ${product.price.toFixed(2)} c/u`;
+      price.textContent = `${formatCurrency(product.price)} c/u`;
 
       const btnGroup = document.createElement("div");
       btnGroup.className = "btn-group mt-2";
@@ -84,8 +84,36 @@ document.addEventListener("DOMContentLoaded", () => {
       cartContainer.appendChild(col);
     });
 
-    totalSpan.textContent = calculateTotal(cart);
+    totalSpan.textContent = formatCurrency(calculateTotal(cart));
   }
 
   updateCartView();
+
+  const checkoutBtn = document.getElementById("checkout-btn");
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+      Swal.fire({
+        title: '¿Finalizar compra?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Finalizar',
+        cancelButtonText: 'Cancelar',
+        background: '#415A77',
+        color: '#ffffff',
+        confirmButtonColor: '#0D1B2A',
+        cancelButtonColor: '#888',
+        customClass: {
+          popup: 'rounded-3',
+          confirmButton: 'btn',
+          cancelButton: 'btn'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/html/ticket.html";
+        }
+      });
+    });
+  }
+
 });

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const nombre = document.getElementById('nombre').value.trim();
     if (nombre) {
-      localStorage.setItem('nombreUsuario', nombre);
+      localStorage.setItem('clientName', nombre);
       window.location.href = '/html/products.html';
     }
   });

@@ -1,23 +1,11 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #FFF;
+  font-family: "Kanit", sans-serif;
+  background-color: #a3bad4;
   padding-top: 80px;
-  color: #1B263B;
 }
 
-.navbar {
-  background-color: #0D1B2A;
-  color: #FFF;
-  height: 80px;
-}
-
-.navbar a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.navbar a:hover {
-  text-decoration: underline;
+.main {
+  min-height: calc(100vh - 160px);
 }
 
 /* Tarjeta de producto */

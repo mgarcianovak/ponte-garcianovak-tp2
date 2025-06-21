@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const price = document.createElement("p");
     price.className = "card-text fw-bold";
-    price.textContent = `$${product.price.toFixed(2)}`;
+    price.textContent = `${formatCurrency(product.price)}`;
 
     const quantityDisplay = document.createElement("p");
     quantityDisplay.className = "card-text mb-1 text-end";
