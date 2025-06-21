@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cart.forEach((product, index) => {
       const col = document.createElement("div");
-      col.className = "col-md-4 mb-3";
+      col.className = "col mb-3";
 
       const card = document.createElement("div");
       card.className = "card h-100";
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const btnAdd = document.createElement("button");
       btnAdd.textContent = "+";
-      btnAdd.className = "btn btn-sm btn-success";
+      btnAdd.className = "btn";
       btnAdd.addEventListener("click", () => {
         product.quantity++;
         saveCart(cart);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const btnRemove = document.createElement("button");
       btnRemove.textContent = "-";
-      btnRemove.className = "btn btn-sm btn-danger";
+      btnRemove.className = "btn";
       btnRemove.addEventListener("click", () => {
         product.quantity--;
         if (product.quantity <= 0) {

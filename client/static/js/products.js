@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const notebooksContainer = document.getElementById("notebooks");
   const pcsContainer = document.getElementById("pcs");
 
-  // Obtener productos del backend
   async function fetchProducts() {
     try {
       const response = await fetch("/products");
@@ -14,33 +13,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Obtener carrito desde localStorage
   function getCart() {
     return JSON.parse(localStorage.getItem("cart")) || [];
   }
 
-  // Guardar carrito en localStorage
   function saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  // Agregar producto al carrito
-  function addToCart(product) {
+  function addToCart(product, quantity = 1) {
     const cart = getCart();
     const existing = cart.find(item => item.id === product.id);
     if (existing) {
-      existing.quantity += 1;
+      existing.quantity += quantity;
     } else {
-      product.quantity = 1;
-      cart.push(product);
+      cart.push({ ...product, quantity });
     }
     saveCart(cart);
-    alert(`Producto agregado al carrito: ${product.name}`);
   }
 
-  // Eliminar producto del carrito
+
   function removeFromCart(product) {
-    let cart = getCart();
+    const cart = getCart();
     const index = cart.findIndex(item => item.id === product.id);
     if (index !== -1) {
       if (cart[index].quantity > 1) {
@@ -49,11 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
         cart.splice(index, 1);
       }
       saveCart(cart);
-      alert(`Producto eliminado del carrito: ${product.name}`);
     }
   }
 
-  // Renderizar una tarjeta de producto
+  function showCartMessage(text, type = 'add') {
+    const div = document.createElement("div");
+    div.className = `cart-feedback ${type === 'remove' ? 'remove' : ''}`;
+    div.textContent = text;
+    console.log("Mensaje:", text);
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 3000);
+  }
+
   function renderProductCard(product, container) {
     const col = document.createElement("div");
     col.className = "col";
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     img.alt = product.name;
 
     const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+    cardBody.className = "card-body d-flex flex-column";
 
     const title = document.createElement("h5");
     title.className = "card-title";
@@ -77,23 +78,59 @@ document.addEventListener("DOMContentLoaded", () => {
     price.className = "card-text fw-bold";
     price.textContent = `$${product.price.toFixed(2)}`;
 
+    const quantityDisplay = document.createElement("p");
+    quantityDisplay.className = "card-text mb-1 text-end";
+    const cart = getCart();
+    const existing = cart.find(item => item.id === product.id);
+    quantityDisplay.textContent = `En carrito: ${existing ? existing.quantity : 0}`;
+
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.min = 1;
+    quantityInput.value = 1;
+    quantityInput.className = "form-control";
+    quantityInput.style.width = "60px";
+
     const btnAdd = document.createElement("button");
-    btnAdd.className = "btn btn-success btn-sm me-2";
+    btnAdd.className = "btn";
     btnAdd.textContent = "Agregar";
-    btnAdd.addEventListener("click", () => addToCart(product));
+    btnAdd.addEventListener("click", () => {
+      const quantity = parseInt(quantityInput.value);
+      if (quantity > 0) {
+        addToCart(product, quantity);
+        updateCard();
+        showCartMessage(`${quantity} producto(s) agregado(s) al carrito`);
+      }
+    });
 
     const btnRemove = document.createElement("button");
-    btnRemove.className = "btn btn-danger btn-sm";
+    btnRemove.className = "btn";
     btnRemove.textContent = "Eliminar";
-    btnRemove.addEventListener("click", () => removeFromCart(product));
+    btnRemove.addEventListener("click", () => {
+      removeFromCart(product);
+      updateCard();
+      showCartMessage(`1 producto eliminado del carrito`, 'remove');
+    });
 
-    cardBody.append(title, price, btnAdd, btnRemove);
+    const controls = document.createElement("div");
+    controls.className = "product-controls";
+    controls.append(quantityInput, btnAdd, btnRemove);
+
+    function updateCard() {
+      const cartUpdated = getCart();
+      const found = cartUpdated.find(item => item.id === product.id);
+      quantityDisplay.textContent = `En carrito: ${found ? found.quantity : 0}`;
+      btnRemove.disabled = !found || found.quantity === 0;
+    }
+
+    updateCard();
+
+    cardBody.append(title, price, quantityDisplay, controls);
     card.append(img, cardBody);
     col.appendChild(card);
     container.appendChild(col);
   }
 
-  // Renderizar todos los productos
   async function renderProducts() {
     const products = await fetchProducts();
 
