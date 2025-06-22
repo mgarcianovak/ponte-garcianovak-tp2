@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const notebooksContainer = document.getElementById("notebooks");
   const pcsContainer = document.getElementById("pcs");
 
+  const notebooksPagination = { currentPage: 1, perPage: 3, data: [] };
+  const pcsPagination = { currentPage: 1, perPage: 3, data: [] };
+
   async function fetchProducts() {
     try {
       const response = await fetch("/products");
@@ -32,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveCart(cart);
   }
 
-
   function removeFromCart(product) {
     const cart = getCart();
     const index = cart.findIndex(item => item.id === product.id);
@@ -50,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const div = document.createElement("div");
     div.className = `cart-feedback ${type === 'remove' ? 'remove' : ''}`;
     div.textContent = text;
-    console.log("Mensaje:", text);
     document.body.appendChild(div);
     setTimeout(() => div.remove(), 3000);
   }
@@ -64,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const img = document.createElement("img");
     img.src = product.image;
-    img.className = "card-img-top product-img";
+    img.className = "card-img-top";
     img.alt = product.name;
 
     const cardBody = document.createElement("div");
@@ -131,19 +132,57 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(col);
   }
 
+  function renderPaginatedProducts(container, pagination) {
+    container.innerHTML = "";
+    const start = (pagination.currentPage - 1) * pagination.perPage;
+    const end = start + pagination.perPage;
+    pagination.data.slice(start, end).forEach(p => renderProductCard(p, container));
+  }
+
+  function setupPaginationControls(containerId, pagination, renderFn) {
+    const prevBtn = document.getElementById(`prev-${containerId}`);
+    const nextBtn = document.getElementById(`next-${containerId}`);
+    const pageLabel = document.getElementById(`page-${containerId}`);
+
+    function update() {
+      renderFn();
+      const totalPages = Math.ceil(pagination.data.length / pagination.perPage);
+      pageLabel.textContent = `Página ${pagination.currentPage} de ${totalPages}`;
+      prevBtn.disabled = pagination.currentPage === 1;
+      nextBtn.disabled = pagination.currentPage >= totalPages;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (pagination.currentPage > 1) {
+        pagination.currentPage--;
+        update();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const totalPages = Math.ceil(pagination.data.length / pagination.perPage);
+      if (pagination.currentPage < totalPages) {
+        pagination.currentPage++;
+        update();
+      }
+    });
+
+    update(); // render inicial
+  }
+
   async function renderProducts() {
     const products = await fetchProducts();
 
-    notebooksContainer.innerHTML = "";
-    pcsContainer.innerHTML = "";
+    notebooksPagination.data = products.filter(p => p.category === "notebook" && p.active);
+    pcsPagination.data = products.filter(p => p.category === "pc" && p.active);
 
-    products.forEach(product => {
-      if (product.category === "notebook") {
-        renderProductCard(product, notebooksContainer);
-      } else if (product.category === "pc") {
-        renderProductCard(product, pcsContainer);
-      }
-    });
+    setupPaginationControls("notebooks", notebooksPagination, () =>
+      renderPaginatedProducts(notebooksContainer, notebooksPagination)
+    );
+
+    setupPaginationControls("pcs", pcsPagination, () =>
+      renderPaginatedProducts(pcsContainer, pcsPagination)
+    );
   }
 
   renderProducts();

@@ -1,0 +1,132 @@
+/* body */
+body {
+    font-family: "Kanit", sans-serif;
+    padding-top: 80px;
+}
+
+body.light-theme {
+    background-color: #a3bad4;
+    color: #152d47;
+}
+
+body.dark-theme {
+    background-color: #152d47;
+    color: #a3bad4;
+}
+
+/* tarjeta de producto */
+.card {
+    border-radius: 10px;
+    border-width: 2px;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+body.dark-theme .card {
+    background-color: #203650;
+    color: #a3bad4;
+    border-color: #5f7997;
+}
+
+body.light-theme .card {
+    background-color: #879fbb;
+    color: #a3bad4;
+    border-color: #728cab;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    filter: brightness(1.03);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    background-color: #FFF;
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+body.light-theme .card-title, body.light-theme .card-text{
+    color: #0D1B2A;
+}
+
+body.dark-theme .card-title, body.dark-theme .card-text{
+    color: #a3bad4;
+}
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
+
+.card-text.fw-bold {
+    font-size: 1rem;
+}
+
+.product-controls {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.product-controls input[type="number"] {
+    width: 60px;
+    padding: 0.2rem;
+    text-align: center;
+    border: 1px solid #0D1B2A;
+    border-radius: 4px;
+}
+
+/* botones */
+
+body.dark-theme .btn {
+    background-color: #a3bad4;
+    color: #0D1B2A;
+    border: 1px solid #0D1B2A;
+}
+
+body.light-theme .btn {
+    background-color: #0D1B2A;
+    color: #a3bad4;
+    border: 1px solid #a3bad4;
+}
+
+body.dark-theme .btn:hover {
+    background-color: #0D1B2A;
+    color: #a3bad4;
+    border: 1px solid #a3bad4;
+}
+
+body.light-theme .btn:hover {
+    background-color: #a3bad4;
+    color: #0D1B2A;
+    border: 1px solid #0D1B2A;
+}
+
+body.light-theme .btn:disabled {
+    background-color: #c9c9c9;
+    color: #616161bd;
+}
+
+body.dark-theme .btn:disabled {
+    background-color: #616161bd;
+    color: #c9c9c9;
+}

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cart.forEach((product, index) => {
       const col = document.createElement("div");
-      col.className = "col mb-3";
+      col.className = "col";
 
       const card = document.createElement("div");
       card.className = "card h-100";
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       img.alt = product.name;
 
       const cardBody = document.createElement("div");
-      cardBody.className = "card-body";
+      cardBody.className = "card-body d-flex flex-column";
 
       const title = document.createElement("h5");
       title.className = "card-title";
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btnGroup.appendChild(btnAdd);
       btnGroup.appendChild(btnRemove);
 
-      cardBody.append(title, quantity, price, btnGroup);
+      cardBody.append(title, price, quantity, btnGroup);
       card.append(img, cardBody);
       col.appendChild(card);
       cartContainer.appendChild(col);
