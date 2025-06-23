@@ -12,6 +12,32 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.removeItem("clientName");
           });
         }
+
+        const checkoutBtn = document.getElementById("checkout-btn");
+        if (checkoutBtn) {
+          checkoutBtn.addEventListener("click", () => {
+            Swal.fire({
+              title: '¿Finalizar compra?',
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'Finalizar',
+              cancelButtonText: 'Cancelar',
+              background: '#415A77',
+              color: '#ffffff',
+              confirmButtonColor: '#0D1B2A',
+              cancelButtonColor: '#888',
+              customClass: {
+                popup: 'rounded-3',
+                confirmButton: 'btn',
+                cancelButton: 'btn'
+              }
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/html/ticket.html";
+              }
+            });
+          });
+        }
       })
       .catch(err => console.error("Error cargando navbar:", err));
   }

@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 // Rutas estaticas
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'static/html/login.html'));
+  res.sendFile(path.join(__dirname, 'static/html/welcome.html'));
 });
 
 // Rutas API

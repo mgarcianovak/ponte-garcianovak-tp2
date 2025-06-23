@@ -7,8 +7,9 @@
   color: white;
   padding: 12px 20px;
   border-radius: 6px;
+  border: 2px solid #425881;
   font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 400;
   z-index: 9999;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   opacity: 1;

@@ -34,6 +34,10 @@
   white-space: nowrap;
 }
 
+#checkout-btn:hover{
+  cursor: pointer;
+}
+
 #theme-toggle {
   background-color: transparent;
   border: 1px solid #ffffff;

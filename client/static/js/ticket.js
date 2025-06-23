@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   restartBtn.addEventListener("click", () => {
     localStorage.removeItem("clientName");
     localStorage.removeItem("cart");
-    window.location.href = "/html/login.html";
+    window.location.href = "/html/welcome.html";
   });
 
   document.getElementById("download-pdf").addEventListener("click", () => {
