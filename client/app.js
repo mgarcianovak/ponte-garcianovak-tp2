@@ -8,14 +8,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
 
-// Rutas API
-const productsRouter = require('./routes/api/productsRouter');
-app.use('/products', productsRouter);
-
 // Rutas estaticas
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'static/html/login.html'));
 });
+
+// Rutas API
+const productsRouter = require('./routes/api/productsRouter');
+app.use('/products', productsRouter);
 
 // Fallback 404
 app.use((req, res) => {

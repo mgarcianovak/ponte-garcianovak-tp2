@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket de Compra</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/ticket.css">
+  <link rel="stylesheet" href="/css/partials.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="/img/favicon.png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <div id="navbar-partial"></div>
+
+  <main class="main d-flex flex-column align-items-center p-3">
+    <div class="ticket-container w-100">
+      <div class="text-center mb-4">
+        <h2 class="ticket-title">TechStore</h2>
+      </div>
+      <section class="ticket-info mb-4">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Cliente:</strong> <span id="client-name"></span></p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p><strong>Fecha:</strong> <span id="date"></span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ticket-table mb-4">
+        <div class="table-responsive">
+          <table class="table table-bordered text-white align-middle">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="ticket-body" class="table-group-divider">
+
+            </tbody>
+          </table>
+        </div>
+        <div class="text-end fs-5 mt-3">
+          <strong>Total: <span id="total-amount">0.00</span></strong>
+        </div>
+      </section>
+
+      <section class="ticket-actions text-center">
+        <button id="download-pdf" class="btn px-4 py-2 me-3">Descargar PDF</button>
+        <button id="restart-btn" class="btn px-4 py-2">Volver al Inicio</button>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-partial"></div>
+
+  <script src="/js/ticket.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/partialsImport.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

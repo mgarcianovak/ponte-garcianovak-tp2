@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function calculateTotal(cart) {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
   function updateCartView() {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cart.forEach((product, index) => {
       const col = document.createElement("div");
-      col.className = "col mb-3";
+      col.className = "col";
 
       const card = document.createElement("div");
       card.className = "card h-100";
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       img.alt = product.name;
 
       const cardBody = document.createElement("div");
-      cardBody.className = "card-body";
+      cardBody.className = "card-body d-flex flex-column";
 
       const title = document.createElement("h5");
       title.className = "card-title";
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const price = document.createElement("p");
       price.className = "card-text fw-bold";
-      price.textContent = `$ ${product.price.toFixed(2)} c/u`;
+      price.textContent = `${formatCurrency(product.price)} c/u`;
 
       const btnGroup = document.createElement("div");
       btnGroup.className = "btn-group mt-2";
@@ -78,14 +78,42 @@ document.addEventListener("DOMContentLoaded", () => {
       btnGroup.appendChild(btnAdd);
       btnGroup.appendChild(btnRemove);
 
-      cardBody.append(title, quantity, price, btnGroup);
+      cardBody.append(title, price, quantity, btnGroup);
       card.append(img, cardBody);
       col.appendChild(card);
       cartContainer.appendChild(col);
     });
 
-    totalSpan.textContent = calculateTotal(cart);
+    totalSpan.textContent = formatCurrency(calculateTotal(cart));
   }
 
   updateCartView();
+
+  const checkoutBtn = document.getElementById("checkout-btn");
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+      Swal.fire({
+        title: '¿Finalizar compra?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Finalizar',
+        cancelButtonText: 'Cancelar',
+        background: '#415A77',
+        color: '#ffffff',
+        confirmButtonColor: '#0D1B2A',
+        cancelButtonColor: '#888',
+        customClass: {
+          popup: 'rounded-3',
+          confirmButton: 'btn',
+          cancelButton: 'btn'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/html/ticket.html";
+        }
+      });
+    });
+  }
+
 });

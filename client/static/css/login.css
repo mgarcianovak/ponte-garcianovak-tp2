@@ -1,5 +1,6 @@
-body{
-    background-color: #fff;
+body {
+  font-family: 'Kanit', sans-serif;
+  background-color: #a3bad4;
 }
 
 .navbar {
@@ -8,15 +9,15 @@ body{
   height: 80px;
 }
 
-.container{
+.container {
   min-height: calc(100vh - 80px);
 }
 
-.card{
-    background-color: #415A77;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #0D1B2A;
+.card {
+  background-color: #415A77;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #0D1B2A;
 }
 
 .btn {
