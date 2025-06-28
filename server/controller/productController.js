@@ -1,5 +1,5 @@
 const productService = require('../service/productService');
-// Controlador para manejar las peticiones relacionadas con productos
+//Controlador para manejar las peticiones relacionadas con productos
 //modifico para que devuelva un objeto con los campos como estan en la base de datos
 exports.getAll = async (req, res) => {
   try {

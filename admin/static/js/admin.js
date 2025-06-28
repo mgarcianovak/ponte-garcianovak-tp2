@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const res = await fetch('http://localhost:3001/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`//envia un toquen de balidacion al backend
       },
       body: JSON.stringify({ email, contraseña })
     });
@@ -22,8 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = await res.json();
     localStorage.setItem('adminId', data.id);
-    window.location.href = '/admin/html/admin-dashboard.html';
+    window.location.href = '/html/admin-dashboard.html';
   } catch (err) {
     alert('Error de autenticación: ' + err.message);
   }
 })});
+document.getElementById("skip").addEventListener("click", () => {
+  window.location.href = "/html/admin-dashboard.html";
+});

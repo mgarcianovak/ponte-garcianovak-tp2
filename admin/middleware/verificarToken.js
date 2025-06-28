@@ -1,7 +1,7 @@
 //verifico si el toquen recivido coincide con el esperado 
 function verificarToken(req, res, next) {
   const header = req.headers['authorization'];
-  const token = header && header.split(' ')[1];
+  const token = header && header.split(' ')[1];//extraigo el toquen de authorization
 
   if (!token) return res.status(401).json({ error: 'Token requerido' });
 

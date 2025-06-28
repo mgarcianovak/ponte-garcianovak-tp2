@@ -7,4 +7,4 @@ const sequelize = new Sequelize('techZone', 'root', 'manager1', {
 });
 
 module.exports = sequelize;
-// nota:por el momento solo traigo los produtos que estan en la base de datos falta colocar los nombres de los usuarios y las contraseñas
+       
