@@ -1,6 +1,8 @@
 const Administrador = require('../models/administrador');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Producto = require('../../server/models/productos');
+
 //Importa el modelo Administrador para consultar en la base de datos.
 //Importa bcrypt para comparar contraseñas encriptadas.
 //Importa jsonwebtoken para crear tokens JWT al loguearse.
@@ -48,3 +50,57 @@ exports.loginAdmin = async (req, res) => {
   }
 };
 
+//logica para cargar un producto para el dashboard traidos desde la base de datos
+exports.renderproducto = async (req, res) => {
+  try {
+    const productos = await Producto.findAll({
+      where: { activo: true }
+    });
+    const mapeo_productos = productos.map(product => ({
+      id: product.id,
+      name: product.nombre,
+      price: product.precio,
+      image: product.imagen,
+      category: product.tipo,
+    }));
+    
+    res.json(mapeo_productos); 
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+    res.status(500).send("Error al cargar productos");
+  }
+};
+//logica para eliminar un producto en la base de datos (canviar el activo de true a falce)
+exports.desactivarProducto = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const producto = await Producto.findByPk(id);
+    if (!producto) return res.status(404).send('Producto no encontrado');
+
+    producto.activo = false;
+    await producto.save();
+
+    res.status(200).json({ mensaje: 'Producto desactivado correctamente' });
+  } catch (err) {
+    console.error('Error al desactivar producto:', err);
+    res.status(500).send('Error del servidor');
+  }
+};
+//logica para reactivar un producto en la base de datos (canviar el activo de falce a true)
+exports.reactivarProducto = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const producto = await Producto.findByPk(id);
+    if (!producto) return res.status(404).send('Producto no encontrado');
+
+    producto.activo = true;
+    await producto.save();
+
+    res.status(200).json({ mensaje: 'Producto reactivado correctamente' });
+  } catch (err) {
+    console.error('Error al reactivar producto:', err);
+    res.status(500).send('Error del servidor');
+  }
+};
+
+//estos ultimos modifican lo que ve del lado del cliente

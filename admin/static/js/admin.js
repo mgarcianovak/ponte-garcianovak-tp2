@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = await res.json();
     localStorage.setItem('adminId', data.id);
-    window.location.href = '/html/admin-dashboard.html';
+    window.location.href = '../html/admin-dashboard.html';
   } catch (err) {
     alert('Error de autenticación: ' + err.message);
   }
 })});
 document.getElementById("skip").addEventListener("click", () => {
-  window.location.href = "/html/admin-dashboard.html";
+  window.location.href = "../html/admin-dashboard.html";
 });

@@ -1,1 +1,54 @@
-<h1>hola</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Administrador</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <script defer src="../js/dashboard.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="../img/favicon.png" />
+</head>
+<body >
+  <nav class="navbar navbar-expand-lg fixed-top custom-navbar text-white shadow-sm py-2">
+    <div class="container-fluid">
+
+      <div class="d-flex align-items-center flex-grow-1">
+        <a class="navbar-brand d-flex align-items-center text-white me-3" href="../html/admin-dashboard.html">
+          <img src="../img/logo.png" alt="Logo" width="40" height="40" class="me-2" />
+          <span class="fs-5">TechStore</span>
+        </a>
+        <span class="navbar-text text-white small">Ponte, Lucas / Garcia Novak, Mariano</span>
+      </div>
+    </div>
+  </nav>
+  
+  <h1 class="text-center mb-4 text-white">Panel del Administrador</h1>
+
+  <button onclick="location.href='/admin/alta-producto.html'" class="btn">Agregar Producto</button><br>
+  <form id="form-reactivar">
+    <label for="input-id" >ID del producto a reactivar:</label>
+    <input type="number" id="input-id" min="1" required />
+    <button class="btn" type="submit">Reactivar producto</button>
+  </form>
+  <h2 class="text-center mb-4 text-white">Listado de Productos</h2>
+  <table class="container">
+    <tbody id="productos" class="card">
+      <script>//Acá se renderizan los productos con JS</script>
+    </tbody>
+  </table>
+  
+  <!-- Modal de confirmación (opcional) -->
+  <div id="modal-confirmacion" style="display:none;">
+    <p>¿Estás seguro de realizar esta acción?</p>
+    <button id="confirmar">Confirmar</button>
+    <button onclick="cerrarModal()">Cancelar</button>
+  </div>
+ <footer>
+    <p>&copy; 2025 TechStore. Todos los derechos reservados.</p>
+    <p><a href="https://www.utnfravirtual.org.ar/" target="_blank">Campus UTN</a>
+    </p>
+  </footer>
+</body>
+</html>

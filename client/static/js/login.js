@@ -32,4 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("Por favor, ingresá un nombre.");
     }
   });
+  //agrego boton de skip
+  document.getElementById("skip").addEventListener("click", () => {
+  window.location.href = "../html/products.html";
+  });
 });
