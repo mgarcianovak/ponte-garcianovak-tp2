@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const usuarioController = require('../controller/usuarioController');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.post('/crear', usuarioController.crearUsuario);
 
 module.exports = router;
+// Este archivo define las rutas relacionadas con los usuarios.

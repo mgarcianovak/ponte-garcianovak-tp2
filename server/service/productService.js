@@ -1,14 +1,30 @@
-class Product {
-  constructor(id, name, price, category, image, active = true) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.category = category;
-    this.image = image;
-    this.active = active;
-  }
-}
+const Producto = require('../models/productos.js');
+const sequelize = require('../config/bd');
 
+
+//Habla directamente con la base de datos usando Sequelize.
+//trae los productos activos de la base de datos
+//y los devuelve como un array de objetos.
+const getAllProducts = async () => {
+  return await Producto.findAll({ where: { activo: true } });
+};
+
+const getProductsByCategory = async (category) => {
+  return await Producto.findAll({ where: { tipo: category, activo: true } });
+};
+
+const getProductById = async (id) => {
+  return await Producto.findByPk(id);
+};
+
+module.exports = {
+  getAllProducts,
+  getProductsByCategory,
+  getProductById
+};
+
+/*
+la base de datos tiene estos productos 
 const products = [
   new Product(1, 'Lenovo Thinkpad', 800000, 'notebook', '/img/products/notebooks/lenovo.jpg', true),
   new Product(2, 'Macbook Air', 1200000, 'notebook', '/img/products/notebooks/macbook.jpg', true),
@@ -23,9 +39,4 @@ const products = [
   new Product(11, 'PC AMD Ryzen 7', 600000, 'pc', '/img/products/pc/r7.jpg', true),
   new Product(12, 'PC Intel Core i7', 700000, 'pc', '/img/products/pc/i7.jpg', true)
 ];
-
-module.exports = {
-  getAllProducts: () => products,
-  getProductsByCategory: (category) => products.filter(p => p.category === category),
-  getProductById: (id) => products.find(p => p.id === parseInt(id))
-};
+*/

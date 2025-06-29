@@ -169,12 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     update(); // render inicial
   }
-
+//cambio la paginacion por que ya lo filtro en el bakend
   async function renderProducts() {
     const products = await fetchProducts();
 
-    notebooksPagination.data = products.filter(p => p.category === "notebook" && p.active);
-    pcsPagination.data = products.filter(p => p.category === "pc" && p.active);
+    notebooksPagination.data = products.filter(p => p.category === "notebook" );
+    pcsPagination.data = products.filter(p => p.category === "pc" );
 
     setupPaginationControls("notebooks", notebooksPagination, () =>
       renderPaginatedProducts(notebooksContainer, notebooksPagination)
