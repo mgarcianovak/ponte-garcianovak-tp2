@@ -10,7 +10,7 @@ const usersRouter = require('./routes/users');
 const apiProductsRouter = require('./routes/api/productsRouter');
 const ticketRouter = require('./routes/api/tickets');
 //ruta para admin
-const adminRouter = require('../admin/routes/admin');
+const adminRouter = require('./routes/admin');
 var app = express();
 
 // view engine setup

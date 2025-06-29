@@ -1,7 +1,7 @@
 const Administrador = require('../models/administrador');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Producto = require('../../server/models/productos');
+const Producto = require('../models/productos');
 
 //Importa el modelo Administrador para consultar en la base de datos.
 //Importa bcrypt para comparar contraseñas encriptadas.

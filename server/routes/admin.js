@@ -1,7 +1,7 @@
 // crea un Router para manejar rutas específicas del administrador
 const express = require('express');
 const router = express.Router();
-const adminController = require('../../admin/controller/admincontoroller');
+const adminController = require('../controller/adminController');
 const verificarToken = require('../middleware/verificarToken');
 //Define las ruta:POST /admin/registrar: crea un administrador 
 router.post("/registrar", adminController.registerAdmin);
