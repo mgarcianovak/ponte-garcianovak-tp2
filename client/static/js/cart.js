@@ -91,6 +91,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const checkoutBtn = document.getElementById("checkout-btn");
 
+  async function guardarTicketEnBBDD() {
+    const nombreCliente = localStorage.getItem("clientName");
+    const cart = getCart();
+    const total = calculateTotal(cart);
+
+    if (!nombreCliente) {
+      Swal.fire('Error', 'No se encontró el nombre del cliente.', 'error');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/api/tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre_cliente: nombreCliente,
+          total: total
+        })
+      });
+
+      if (response.ok) {
+        console.log('Ticket guardado en BBDD');
+        window.location.href = "/html/ticket.html";
+      } else {
+        const errorText = await response.text();
+        Swal.fire('Error', 'No se pudo guardar el ticket.\n' + errorText, 'error');
+      }
+    } catch (err) {
+      console.error('Error de red:', err);
+      Swal.fire('Error', 'No se pudo conectar al servidor.', 'error');
+    }
+  }
+
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       Swal.fire({
@@ -110,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/html/ticket.html";
+          guardarTicketEnBBDD();
         }
       });
     });

@@ -8,6 +8,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiProductsRouter = require('./routes/api/productsRouter');
+const ticketRouter = require('./routes/api/tickets');
 //ruta para admin
 const adminRouter = require('../admin/routes/admin');
 var app = express();
@@ -28,6 +29,7 @@ app.use('/users', usersRouter);
 app.use('/api/products', apiProductsRouter);
 //para admin
 app.use('/admin', adminRouter);
+app.use('/api/tickets', ticketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
