@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Panel Administrador</title>
@@ -7,11 +8,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
+
 <body class="bg-dark text-white">
 
   <nav class="navbar navbar-expand-lg bg-dark fixed-top custom-navbar text-white shadow-sm py-2">
@@ -37,7 +37,7 @@
     <!-- Sección Notebook -->
     <div class="mb-5">
       <h2>Notebook</h2>
-      <% if (notebook.length > 0) { %>
+      <% if (notebook.length> 0) { %>
         <div class="table-responsive">
           <table class="table table-dark table-striped table-hover mt-3">
             <thead>
@@ -50,11 +50,16 @@
               </tr>
             </thead>
             <tbody>
-              <% notebook.forEach(p => { %>
+              <% notebook.forEach(p=> { %>
                 <tr>
-                  <td><%= p.id %></td>
-                  <td><%= p.nombre %></td>
-                  <td>$<%= p.precio %></td>
+                  <td>
+                    <%= p.id %>
+                  </td>
+                  <td>
+                    <%= p.nombre %>
+                  </td>
+                  <td>$<%= p.precio %>
+                  </td>
                   <td>
                     <span class="badge <%= p.activo ? 'bg-success' : 'bg-secondary' %>">
                       <%= p.activo ? 'Activo' : 'Inactivo' %>
@@ -62,30 +67,36 @@
                   </td>
                   <td>
                     <% if (p.activo) { %>
-                      <form method="POST" action="/admin/products/<%= p.id %>/deactivate" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-warning">Desactivar</button>
+                      <form method="POST" action="/admin/products/<%= p.id %>/deactivate"
+                        class="d-inline confirm-action">
+                        <button type="button" class="btn btn-sm btn-warning btn-confirmar">
+                          Desactivar
+                        </button>
                       </form>
-                    <% } else { %>
-                      <form method="POST" action="/admin/products/<%= p.id %>/activate" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-success">Reactivar</button>
-                      </form>
-                    <% } %>
-                    <a href="/admin/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-light">Editar</a>
+                      <% } else { %>
+                        <form method="POST" action="/admin/products/<%= p.id %>/activate"
+                          class="d-inline confirm-action">
+                          <button type="button" class="btn btn-sm btn-success btn-confirmar">
+                            Reactivar
+                          </button>
+                        </form>
+                        <% } %>
+                          <a href="/admin/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-light">Editar</a>
                   </td>
                 </tr>
-              <% }) %>
+                <% }) %>
             </tbody>
           </table>
         </div>
-      <% } else { %>
-        <p>No hay productos de tipo Notebook.</p>
-      <% } %>
+        <% } else { %>
+          <p>No hay productos de tipo Notebook.</p>
+          <% } %>
     </div>
 
     <!-- Sección PC -->
     <div class="mb-5">
       <h2>PC</h2>
-      <% if (pc.length > 0) { %>
+      <% if (pc.length> 0) { %>
         <div class="table-responsive">
           <table class="table table-dark table-striped table-hover mt-3">
             <thead>
@@ -98,11 +109,16 @@
               </tr>
             </thead>
             <tbody>
-              <% pc.forEach(p => { %>
+              <% pc.forEach(p=> { %>
                 <tr>
-                  <td><%= p.id %></td>
-                  <td><%= p.nombre %></td>
-                  <td>$<%= p.precio %></td>
+                  <td>
+                    <%= p.id %>
+                  </td>
+                  <td>
+                    <%= p.nombre %>
+                  </td>
+                  <td>$<%= p.precio %>
+                  </td>
                   <td>
                     <span class="badge <%= p.activo ? 'bg-success' : 'bg-secondary' %>">
                       <%= p.activo ? 'Activo' : 'Inactivo' %>
@@ -113,24 +129,52 @@
                       <form method="POST" action="/admin/products/<%= p.id %>/deactivate" class="d-inline">
                         <button type="submit" class="btn btn-sm btn-warning">Desactivar</button>
                       </form>
-                    <% } else { %>
-                      <form method="POST" action="/admin/products/<%= p.id %>/activate" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-success">Reactivar</button>
-                      </form>
-                    <% } %>
-                    <a href="/admin/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-light">Editar</a>
+                      <% } else { %>
+                        <form method="POST" action="/admin/products/<%= p.id %>/activate" class="d-inline">
+                          <button type="submit" class="btn btn-sm btn-success">Reactivar</button>
+                        </form>
+                        <% } %>
+                          <a href="/admin/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-light">Editar</a>
                   </td>
                 </tr>
-              <% }) %>
+                <% }) %>
             </tbody>
           </table>
         </div>
-      <% } else { %>
-        <p>No hay productos de tipo PC.</p>
-      <% } %>
+        <% } else { %>
+          <p>No hay productos de tipo PC.</p>
+          <% } %>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // Selecciona todos los botones con clase .btn-confirmar
+    document.querySelectorAll('.btn-confirmar').forEach(button => {
+      button.addEventListener('click', function () {
+        const form = this.closest('form'); // Encuentra el form relacionado
+
+        const esDesactivar = form.action.includes('/deactivate');
+        const accion = esDesactivar ? 'desactivar' : 'reactivar';
+
+        Swal.fire({
+          title: `¿Estás seguro de ${accion} este producto?`,
+          text: `Esta acción ${esDesactivar ? 'lo ocultará de los clientes' : 'lo volverá a mostrar'}.`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, confirmar',
+          cancelButtonText: 'Cancelar',
+          confirmButtonColor: esDesactivar ? '#dc3545' : '#28a745',
+          cancelButtonColor: '#6c757d'
+        }).then(result => {
+          if (result.isConfirmed) {
+            form.submit();
+          }
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>

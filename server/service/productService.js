@@ -1,10 +1,10 @@
 const Producto = require('../models/productos.js');
 const sequelize = require('../config/bd');
 
-
 //Habla directamente con la base de datos usando Sequelize.
 //trae los productos activos de la base de datos
 //y los devuelve como un array de objetos.
+
 const getAllProducts = async () => {
   return await Producto.findAll({ where: { activo: true } });
 };

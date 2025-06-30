@@ -27,7 +27,7 @@ exports.registerAdmin = async (req, res) => {
 };
 
 exports.loginForm = (req, res) => {
-  res.render('login');  // Renderiza views/login.ejs
+  res.render('login');
 };
 
 exports.loginAdmin = async (req, res) => {
@@ -66,14 +66,6 @@ exports.loginAdmin = async (req, res) => {
 exports.dashboard = async (req, res) => {
   try {
     const productos = await Producto.findAll();
-    const mapeo_productos = productos.map(product => ({
-      id: product.id,
-      name: product.nombre,
-      price: product.precio,
-      active: product.activo,
-      image: product.imagen,
-      category: product.tipo,
-    }));
 
     const notebook = productos.filter(p => p.tipo === 'notebook');
     const pc = productos.filter(p => p.tipo === 'pc');

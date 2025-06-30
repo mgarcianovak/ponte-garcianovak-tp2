@@ -51,8 +51,8 @@ CREATE TABLE tickets (
 -- ============================================
 -- Crear tabla administrador
 -- ============================================
-
-CREATE TABLE IF NOT EXISTS administrador (
+DROP TABLE IF EXISTS administrador;
+CREATE TABLE administrador (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
   pass VARCHAR(255) NOT NULL
