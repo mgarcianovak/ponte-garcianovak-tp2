@@ -47,3 +47,20 @@ CREATE TABLE tickets (
 );
 
 -- Nota: no insertamos registros de tickets porque se generan al confirmar la compra.
+
+-- ============================================
+-- Crear tabla administrador
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS administrador (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  pass VARCHAR(255) NOT NULL
+);
+
+-- ============================================
+-- Insertar admin de prueba
+-- ============================================
+
+INSERT INTO administrador (email, pass)
+VALUES ('test@admin.com', '123456');

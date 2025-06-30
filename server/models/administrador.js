@@ -8,7 +8,7 @@ const Administrador = sequelize.define('Administrador', {
     allowNull: false,
     unique: true
   },
-  contraseña: {
+  pass: {
     type: DataTypes.STRING,
     allowNull: false
   }

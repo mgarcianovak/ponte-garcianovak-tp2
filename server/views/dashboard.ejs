@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Panel de Administración</h1>
+    <nav>
+      <a href="/admin/products/new">Agregar Producto</a>
+      <a href="/admin/logout">Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Listado de Productos</h2>
+
+    <table border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td>$<%= product.price %></td>
+            <td><%= product.active ? 'Activo' : 'Inactivo' %></td>
+            <td>
+              <% if (product.active) { %>
+                <form method="POST" action="/admin/products/<%= product.id %>/deactivate">
+                  <button type="submit">Desactivar</button>
+                </form>
+              <% } else { %>
+                <form method="POST" action="/admin/products/<%= product.id %>/activate">
+                  <button type="submit">Activar</button>
+                </form>
+              <% } %>
+              <a href="/admin/products/<%= product.id %>/edit">Editar</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>
