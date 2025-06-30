@@ -49,7 +49,7 @@ exports.loginAdmin = async (req, res) => {
     req.session.adminId = admin.id; // Guarda ID en la sesión
 
     // Redirige al Dashboard
-    res.redirect('dashboard');
+    res.redirect('/admin/dashboard');
 
   } catch (err) {
     console.error('Error en loginAdmin:', err);
@@ -69,11 +69,51 @@ exports.dashboard = async (req, res) => {
       category: product.tipo,
     }));
 
-    res.render('dashboard', { products: mapeo_productos });
+    const notebook = productos.filter(p => p.tipo === 'notebook');
+    const pc = productos.filter(p => p.tipo === 'pc');
+
+    res.render('dashboard', { notebook, pc });
   } catch (err) {
     console.error("Error cargando productos:", err);
     res.status(500).send("Error al cargar dashboard");
   }
+};
+
+exports.productForm = (req, res) => {
+  res.render('productForm', { product: null });
+};
+
+exports.createProduct = async (req, res) => {
+  try {
+    await Producto.create({
+      nombre: req.body.nombre,
+      precio: req.body.precio,
+      imagen: `/img/products/${req.file.filename}`,
+      tipo: req.body.tipo,
+      activo: true
+    });
+    res.redirect('/admin/dashboard');
+  } catch (err) {
+    console.error('Error al crear producto:', err);
+    res.status(500).send('Error al crear producto');
+  }
+};
+
+exports.editForm = async (req, res) => {
+  const product = await Producto.findByPk(req.params.id);
+  res.render('productForm', { product });
+};
+
+exports.updateProduct = async (req, res) => {
+  const product = await Producto.findByPk(req.params.id);
+  product.nombre = req.body.nombre;
+  product.precio = req.body.precio;
+  product.tipo = req.body.tipo;
+  if (req.file) {
+    product.imagen = `/uploads/${req.file.filename}`;
+  }
+  await product.save();
+  res.redirect('/admin/dashboard');
 };
 
 exports.desactivarProducto = async (req, res) => {
@@ -87,7 +127,7 @@ exports.desactivarProducto = async (req, res) => {
     await producto.save();
 
     // Redirige de nuevo al dashboard
-    res.redirect('dashboard');
+    res.redirect('/admin/dashboard');
 
   } catch (err) {
     console.error('Error al desactivar producto:', err);
@@ -106,7 +146,7 @@ exports.reactivarProducto = async (req, res) => {
     await producto.save();
 
     // Redirige de nuevo al dashboard
-    res.redirect('dashboard');
+    res.redirect('/admin/dashboard');
 
   } catch (err) {
     console.error('Error al reactivar producto:', err);
@@ -116,6 +156,6 @@ exports.reactivarProducto = async (req, res) => {
 
 exports.logout = (req, res) => {
   req.session.destroy(() => {
-    res.redirect('login');
+    res.redirect('/admin/login');
   });
 };

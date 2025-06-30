@@ -1,35 +1,32 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/bd');
-// Importa la instancia de Sequelize desde tu archivo de configuración
-//Define la estructura de la tabla y cómo debe comportarse en Node.js. 
+
 const Producto = sequelize.define('Producto', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   nombre: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   precio: {
     type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-    // Validación para asegurarse de que el precio sea un número positivo
-    get() {
-        const Value = this.getDataValue('precio');
-        return Value === null ? null : parseFloat(Value);
-      }
+    allowNull: false
   },
-  imagen: {
-    type: DataTypes.STRING,
-  },
+  imagen: DataTypes.STRING,
   tipo: {
     type: DataTypes.ENUM('pc', 'notebook'),
     allowNull: false,
   },
   activo: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true,
-  },
+    defaultValue: true
+  }
 }, {
   tableName: 'productos',
-  timestamps: false,
+  timestamps: false
 });
 
 module.exports = Producto;
