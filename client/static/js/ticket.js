@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("cart");
     window.location.href = "/html/welcome.html";
   });
-
+  //descargar pdf
   document.getElementById("download-pdf").addEventListener("click", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
