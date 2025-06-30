@@ -49,7 +49,7 @@
 
         <div>
           <label for="precio" class="form-label text-white">Precio:</label>
-          <input type="number" id="precio" name="precio" step="0.01" class="form-control"
+          <input type="number" id="precio" name="precio" step="0.01" min="1" class="form-control"
             value="<%= product ? product.precio : '' %>" required>
         </div>
 
