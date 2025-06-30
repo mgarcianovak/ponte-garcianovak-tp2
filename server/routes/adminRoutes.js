@@ -6,7 +6,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../client/static/img/products');
+    cb(null, '../client/static/img/products/new');
   },
   filename: function (req, file, cb) {
     const unique = Date.now() + '-' + file.originalname;
@@ -14,6 +14,9 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage: storage });
+
+router.get('/register', adminController.registerForm);
+router.post('/register', adminController.registerAdmin);
 
 router.get('/login', adminController.loginForm);
 router.post('/login', adminController.loginAdmin);

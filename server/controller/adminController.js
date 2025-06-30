@@ -2,21 +2,27 @@ const Administrador = require('../models/administrador');
 const Producto = require('../models/productos');
 const bcrypt = require('bcrypt');
 
+exports.registerForm = (req, res) => {
+  res.render('register', {error:null});
+};
+
 exports.registerAdmin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, pass } = req.body;
 
   try {
     const existing = await Administrador.findOne({ where: { email } });
     if (existing) {
-      return res.status(400).json({ error: "El email ya está registrado" });
+      return res.render('register', { error: 'El correo ya está registrado' });
     }
 
-    const hash = await bcrypt.hash(password, 10);
+    const hash = await bcrypt.hash(pass, 10);
+
     await Administrador.create({ email, pass: hash });
-    res.status(201).json({ message: "Administrador creado" });
+
+    res.redirect('/admin/login');
   } catch (error) {
-    console.error("Error al crear admin:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    console.error('Error al registrar admin:', error);
+    res.render('register', { error: 'Error en el servidor' });
   }
 };
 
@@ -88,7 +94,7 @@ exports.createProduct = async (req, res) => {
     await Producto.create({
       nombre: req.body.nombre,
       precio: req.body.precio,
-      imagen: `/img/products/${req.file.filename}`,
+      imagen: `/img/products/new/${req.file.filename}`,
       tipo: req.body.tipo,
       activo: true
     });
@@ -110,7 +116,7 @@ exports.updateProduct = async (req, res) => {
   product.precio = req.body.precio;
   product.tipo = req.body.tipo;
   if (req.file) {
-    product.imagen = `/uploads/${req.file.filename}`;
+    product.imagen = `/img/products/new/${req.file.filename}`;
   }
   await product.save();
   res.redirect('/admin/dashboard');
