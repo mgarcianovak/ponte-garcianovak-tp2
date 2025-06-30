@@ -6,7 +6,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../client/static/img/products/new');
+    cb(null, '../client/static/img/products');
   },
   filename: function (req, file, cb) {
     const unique = Date.now() + '-' + file.originalname;

@@ -86,7 +86,7 @@ exports.createProduct = async (req, res) => {
     await Producto.create({
       nombre: req.body.nombre,
       precio: req.body.precio,
-      imagen: `/img/products/new/${req.file.filename}`,
+      imagen: `/img/products/${req.file.filename}`,
       tipo: req.body.tipo,
       activo: true
     });
@@ -108,7 +108,7 @@ exports.updateProduct = async (req, res) => {
   product.precio = req.body.precio;
   product.tipo = req.body.tipo;
   if (req.file) {
-    product.imagen = `/img/products/new/${req.file.filename}`;
+    product.imagen = `/img/products/${req.file.filename}`;
   }
   await product.save();
   res.redirect('/admin/dashboard');
