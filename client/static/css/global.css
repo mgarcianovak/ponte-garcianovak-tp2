@@ -40,7 +40,6 @@ body.light-theme .card {
 
 .card:hover {
     transform: scale(1.02);
-    filter: brightness(1.03);
 }
 
 .card-img-top {
@@ -63,11 +62,13 @@ body.light-theme .card {
     margin-bottom: 0.5rem;
 }
 
-body.light-theme .card-title, body.light-theme .card-text{
+body.light-theme .card-title,
+body.light-theme .card-text {
     color: #0D1B2A;
 }
 
-body.dark-theme .card-title, body.dark-theme .card-text{
+body.dark-theme .card-title,
+body.dark-theme .card-text {
     color: #a3bad4;
 }
 

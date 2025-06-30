@@ -126,12 +126,18 @@
                   </td>
                   <td>
                     <% if (p.activo) { %>
-                      <form method="POST" action="/admin/products/<%= p.id %>/deactivate" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-warning">Desactivar</button>
+                      <form method="POST" action="/admin/products/<%= p.id %>/deactivate"
+                        class="d-inline confirm-action">
+                        <button type="button" class="btn btn-sm btn-warning btn-confirmar">
+                          Desactivar
+                        </button>
                       </form>
                       <% } else { %>
-                        <form method="POST" action="/admin/products/<%= p.id %>/activate" class="d-inline">
-                          <button type="submit" class="btn btn-sm btn-success">Reactivar</button>
+                        <form method="POST" action="/admin/products/<%= p.id %>/activate"
+                          class="d-inline confirm-action">
+                          <button type="button" class="btn btn-sm btn-success btn-confirmar">
+                            Reactivar
+                          </button>
                         </form>
                         <% } %>
                           <a href="/admin/products/<%= p.id %>/edit" class="btn btn-sm btn-outline-light">Editar</a>
@@ -151,8 +157,10 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     // Selecciona todos los botones con clase .btn-confirmar
-    document.querySelectorAll('.btn-confirmar').forEach(button => {
-      button.addEventListener('click', function () {
+    document.querySelectorAll('.btn-confirmar').forEach(button =>
+    {
+      button.addEventListener('click', function ()
+      {
         const form = this.closest('form'); // Encuentra el form relacionado
 
         const esDesactivar = form.action.includes('/deactivate');
@@ -167,8 +175,10 @@
           cancelButtonText: 'Cancelar',
           confirmButtonColor: esDesactivar ? '#dc3545' : '#28a745',
           cancelButtonColor: '#6c757d'
-        }).then(result => {
-          if (result.isConfirmed) {
+        }).then(result =>
+        {
+          if (result.isConfirmed)
+          {
             form.submit();
           }
         });
